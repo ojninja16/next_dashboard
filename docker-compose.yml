@@ -1,0 +1,21 @@
+version: '3.8'
+services:
+  py-backend:
+    build:
+      context: ./backend  # Path to backend folder containing Dockerfile
+    container_name: py-backend
+    volumes:
+      - ./backend/server:/server  # Mount local server folder to /server in the container
+    ports:
+      - "8000:8000"  # Map port 8000 on the host to port 8000 in the container
+    environment:
+      - DEBUG=1  # Environment variables for Django can go here
+
+  nextjs-frontend:
+    build:
+      context: ./frontend  # Path to frontend folder containing Dockerfile
+    container_name: nextjs-frontend
+    volumes:
+      - ./frontend:/app  # Mount local frontend folder to /app in the container
+    ports:
+      - "3000:3000"  # Map port 3000 on the host to port 3000 in the container
